@@ -1,23 +1,33 @@
 package co.edu.unal.software_engineering.labs.pojo;
 
-public class CoursePOJO{
+import co.edu.unal.software_engineering.labs.model.Course;
+
+public class CoursePOJO {
 
     private String courseName;
     private Integer durationHours;
 
-    public String getCourseName( ){
+    public CoursePOJO(Course curso) {
+        if (curso == null) {
+            throw new NullPointerException("Course cannot be null");
+        }
+        this.courseName = curso.getCourseName();
+        this.durationHours = curso.getDurationHours();
+    }
+
+    public String getCourseName() {
         return courseName;
     }
 
-    public void setCourseName( String courseName ){
+    public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 
-    public Integer getDurationHours( ){
+    public Integer getDurationHours() {
         return durationHours;
     }
 
-    public void setDurationHours( Integer durationHours ){
+    public void setDurationHours(Integer durationHours) {
         this.durationHours = durationHours;
     }
 }

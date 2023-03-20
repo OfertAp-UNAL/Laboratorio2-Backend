@@ -6,26 +6,29 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
-public class AssociationService{
+public class AssociationService {
 
     private AssociationRepository associationRepository;
 
-    public AssociationService( AssociationRepository associationRepository ){
+    public AssociationService(AssociationRepository associationRepository) {
         this.associationRepository = associationRepository;
     }
 
-    public void save( Association association ){
-        associationRepository.save( association );
+    public void save(Association association) {
+        associationRepository.save(association);
     }
 
-    public void associate( User user, Role role, Course course, Period period ){
-        Association association = new Association( user, role, course, period );
-        save( association );
+    public void associate(User user, Role role, Course course, Period period) {
+        Association association = new Association(user, role, course, period);
+        save(association);
     }
 
-    public List<Association> getAssociationsByUser( User user ){
-        return associationRepository.getAssociationsByUserAndRoles( user, user.getRoles( ) );
+    public Association findById(Integer id) {
+        return associationRepository.findById(id).orElse(null);
+    }
+
+    public List<Association> getAssociationsByUser(User user) {
+        return associationRepository.getAssociationsByUserAndRoles(user, user.getRoles());
     }
 }

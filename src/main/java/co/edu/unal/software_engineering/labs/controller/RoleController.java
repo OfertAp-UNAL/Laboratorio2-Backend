@@ -1,6 +1,5 @@
 package co.edu.unal.software_engineering.labs.controller;
 
-import co.edu.unal.software_engineering.labs.model.Role;
 import co.edu.unal.software_engineering.labs.pojo.RolePOJO;
 import co.edu.unal.software_engineering.labs.service.RoleService;
 import co.edu.unal.software_engineering.labs.service.UserRolesService;
@@ -30,7 +29,7 @@ public class RoleController {
     }
 
     @GetMapping(value = { "/roles" })
-    public List<Role> getAllRoles() {
+    public List<RolePOJO> getAllRoles() {
         return roleService.getAll();
     }
 }
