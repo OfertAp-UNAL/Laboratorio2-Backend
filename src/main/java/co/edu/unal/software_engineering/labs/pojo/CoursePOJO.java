@@ -7,6 +7,9 @@ public class CoursePOJO {
     private String courseName;
     private Integer durationHours;
 
+    public CoursePOJO() {
+    }
+
     public CoursePOJO(Course curso) {
         if (curso == null) {
             throw new NullPointerException("Course cannot be null");
