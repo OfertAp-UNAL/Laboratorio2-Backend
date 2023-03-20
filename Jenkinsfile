@@ -2,7 +2,11 @@ pipeline{
     agent any
 
     environment {
-        PORT = '8585'
+        DB_PORT = '8585',
+        DB_USER= 'admin',
+        DB_PASSWORD= 'admin',
+        DB_NAME = 'labs',
+        PORT = '7777',
     }
 
     stages{

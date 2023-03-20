@@ -17,4 +17,8 @@
         <sqlFile dbms="postgresql" path="database/migrations/0.0.3/alter-constraint-fk_user_role.sql"/>
     </changeSet>
 
+    <changeSet id="4" author="Edgar González">
+        <sqlFile dbms="postgresql" path="database/migrations/0.0.3/update-sequence.sql"/>
+    </changeSet>
+
 </databaseChangeLog>
