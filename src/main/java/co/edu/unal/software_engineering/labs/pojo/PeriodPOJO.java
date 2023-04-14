@@ -6,6 +6,9 @@ public class PeriodPOJO {
 
     private String periodName;
 
+    public PeriodPOJO() {
+    }
+
     public PeriodPOJO(Period periodo) {
         if (periodo == null) {
             throw new NullPointerException("Period cannot be null");
