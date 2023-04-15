@@ -4,6 +4,7 @@ import co.edu.unal.software_engineering.labs.model.Course;
 
 public class CoursePOJO {
 
+    private Integer id;
     private String courseName;
     private Integer durationHours;
 
@@ -16,6 +17,11 @@ public class CoursePOJO {
         }
         this.courseName = curso.getCourseName();
         this.durationHours = curso.getDurationHours();
+        this.id = curso.getId();
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getCourseName() {

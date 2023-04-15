@@ -4,6 +4,7 @@ import co.edu.unal.software_engineering.labs.model.Period;
 
 public class PeriodPOJO {
 
+    private Integer id;
     private String periodName;
 
     public PeriodPOJO() {
@@ -14,6 +15,11 @@ public class PeriodPOJO {
             throw new NullPointerException("Period cannot be null");
         }
         this.periodName = periodo.getPeriodName();
+        this.id = periodo.getId();
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getPeriodName() {

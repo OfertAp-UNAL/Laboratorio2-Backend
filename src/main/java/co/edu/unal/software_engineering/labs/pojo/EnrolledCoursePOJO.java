@@ -3,36 +3,40 @@ package co.edu.unal.software_engineering.labs.pojo;
 import co.edu.unal.software_engineering.labs.model.Association;
 import co.edu.unal.software_engineering.labs.model.Course;
 
-public class EnrolledCoursePOJO{
+public class EnrolledCoursePOJO {
 
     private final Integer courseId;
     private final String courseName;
     private final Integer courseDurationHours;
     private final RolePOJO role;
+    private final String periodName;
 
-
-    public EnrolledCoursePOJO( Association association ){
-        Course course = association.getCourse( );
-        courseId = course.getId( );
-        courseName = course.getCourseName( );
-        courseDurationHours = course.getDurationHours( );
-        role = new RolePOJO( association.getRole( ) );
+    public EnrolledCoursePOJO(Association association) {
+        Course course = association.getCourse();
+        courseId = course.getId();
+        courseName = course.getCourseName();
+        courseDurationHours = course.getDurationHours();
+        role = new RolePOJO(association.getRole());
+        periodName = association.getPeriod().getPeriodName();
     }
 
-
-    public Integer getCourseId( ){
+    public Integer getCourseId() {
         return courseId;
     }
 
-    public String getCourseName( ){
+    public String getCourseName() {
         return courseName;
     }
 
-    public Integer getCourseDurationHours( ){
+    public Integer getCourseDurationHours() {
         return courseDurationHours;
     }
 
-    public RolePOJO getRole( ){
+    public RolePOJO getRole() {
         return role;
+    }
+
+    public String getPeriodName() {
+        return periodName;
     }
 }

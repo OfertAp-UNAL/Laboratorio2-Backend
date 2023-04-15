@@ -9,22 +9,22 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-    private static final String[] publicResources = new String[] { "/registro/nuevo-usuario/rol/**", "/roles",
-            "/cursos", "/periodos" };
-    private static final String[] userResources = new String[] { "/usuario/**", "/registro/nuevo-rol/**",
-            "/mis-roles", "/mis-cursos", "/mis-notas", };
-    private static final String[] teacherResources = new String[] { "/profesor/**" };
-    private static final String[] studentResources = new String[] { "/estudiante/**" };
+        private static final String[] publicResources = new String[] { "/registro/nuevo-usuario/rol/**", "/roles",
+                        "/cursos", "/periodos" };
+        private static final String[] userResources = new String[] { "/usuario/**", "/registro/nuevo-rol/**",
+                        "/mis-roles", "/mis-cursos", "/mis-notas", "/inscribir/**" };
+        private static final String[] teacherResources = new String[] { "/profesor/**" };
+        private static final String[] studentResources = new String[] { "/estudiante/**" };
 
-    @Override
-    public void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .authorizeRequests()
-                .antMatchers(publicResources).permitAll()
-                .antMatchers(userResources).authenticated()
-                .antMatchers(teacherResources).hasAuthority("ROLE_PROFESOR")
-                .antMatchers(studentResources).hasAuthority("ROLE_ESTUDIANTE")
-                .and().cors().disable();
-    }
+        @Override
+        public void configure(HttpSecurity httpSecurity) throws Exception {
+                httpSecurity
+                                .authorizeRequests()
+                                .antMatchers(publicResources).permitAll()
+                                .antMatchers(userResources).authenticated()
+                                .antMatchers(teacherResources).hasAuthority("ROLE_PROFESOR")
+                                .antMatchers(studentResources).hasAuthority("ROLE_ESTUDIANTE")
+                                .and().cors().disable();
+        }
 
 }

@@ -1,6 +1,11 @@
 package co.edu.unal.software_engineering.labs.controller;
 
+import co.edu.unal.software_engineering.labs.model.Course;
+import co.edu.unal.software_engineering.labs.model.Period;
 import co.edu.unal.software_engineering.labs.model.Role;
+import co.edu.unal.software_engineering.labs.service.CourseService;
+import co.edu.unal.software_engineering.labs.service.PeriodService;
+import co.edu.unal.software_engineering.labs.service.AssociationService;
 import co.edu.unal.software_engineering.labs.model.User;
 import co.edu.unal.software_engineering.labs.pojo.LoginUserPOJO;
 import co.edu.unal.software_engineering.labs.pojo.RegisterUserPOJO;
@@ -24,10 +29,22 @@ public class UserController {
 
     private PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
+    private CourseService courseService;
+
+    private PeriodService periodService;
+
+    private AssociationService associationService;
+
+    public UserController(
+            UserService userService, RoleService roleService,
+            PasswordEncoder passwordEncoder, CourseService courseService,
+            PeriodService periodService, AssociationService associationService) {
         this.userService = userService;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
+        this.courseService = courseService;
+        this.periodService = periodService;
+        this.associationService = associationService;
     }
 
     @PostMapping(value = { "/registro/nuevo-usuario/rol/{roleId}" })
@@ -62,6 +79,27 @@ public class UserController {
         }
         existingUser.addRole(role);
         userService.save(existingUser);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = { "/inscribir/rol/{roleId}/periodo/{periodId}/curso/{courseId}" })
+    public ResponseEntity<Void> associateStudent(
+            @PathVariable Integer roleId,
+            @PathVariable Integer periodId,
+            @PathVariable Integer courseId) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User student = userService.findByUsername(username);
+        Course course = courseService.findById(courseId);
+        Period period = periodService.findById(periodId);
+        Role role = roleService.findById(roleId);
+
+        if (course == null || period == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        role.setId(Role.ROLE_STUDENT);
+        associationService.associate(student, role, course, period);
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

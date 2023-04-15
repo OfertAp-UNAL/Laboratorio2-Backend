@@ -5,6 +5,7 @@ import co.edu.unal.software_engineering.labs.model.Association;
 public class InscribedUserPOJO {
     private Integer associationId;
     private String username;
+    private Integer userId;
     private String role;
     private String period;
     private GradePOJO gradePOJO;
@@ -19,6 +20,7 @@ public class InscribedUserPOJO {
         this.username = association.getUser().getUsername();
         this.role = association.getRole().getRoleName();
         this.period = association.getPeriod().getPeriodName();
+        this.userId = association.getUser().getId();
     }
 
     public Integer getAssociationId() {
@@ -27,6 +29,10 @@ public class InscribedUserPOJO {
 
     public void setAssociationId(Integer associationId) {
         this.associationId = associationId;
+    }
+
+    public Integer getUserId() {
+        return userId;
     }
 
     public String getUsername() {
